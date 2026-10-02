@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <meta name="description" content="Cek cuaca kota mana pun secara real-time menggunakan OpenWeatherMap API.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="app">
+        <h1 class="app__title">🌤️ Weather App</h1>
+        <p class="app__subtitle">Cek cuaca kota mana pun secara real-time</p>
+
+        <form id="searchForm" class="search">
+            <input
+                type="text"
+                id="cityInput"
+                class="search__input"
+                placeholder="Ketik nama kota, misal: Jakarta"
+                autocomplete="off"
+                required
+            >
+            <button type="submit" class="search__button">Cari</button>
+        </form>
+
+        <!-- Riwayat pencarian (bonus feature, disimpan di LocalStorage) -->
+        <div id="historyWrap" class="history hidden">
+            <div class="history__header">
+                <span class="history__label">Riwayat pencarian</span>
+                <button id="clearHistory" class="history__clear">Hapus</button>
+            </div>
+            <div id="historyList" class="history__list"></div>
+        </div>
+
+        <!-- Loading state -->
+        <div id="loading" class="state state--loading hidden">
+            <div class="spinner"></div>
+            <p>Mengambil data cuaca...</p>
+        </div>
+
+        <!-- Error state -->
+        <div id="error" class="state state--error hidden">
+            <p id="errorMessage"></p>
+        </div>
+
+        <!-- Hasil cuaca -->
+        <section id="weatherCard" class="weather-card hidden">
+            <div class="weather-card__header">
+                <div>
+                    <h2 id="cityName" class="weather-card__city"></h2>
+                    <p id="cityDate" class="weather-card__date"></p>
+                </div>
+                <button id="unitToggle" class="unit-toggle">°C / °F</button>
+            </div>
+
+            <div class="weather-card__main">
+                <img id="weatherIcon" class="weather-card__icon" alt="Ikon cuaca">
+                <div class="weather-card__temp-wrap">
+                    <span id="temperature" class="weather-card__temp"></span>
+                    <span id="feelsLike" class="weather-card__feels"></span>
+                </div>
+            </div>
+
+            <p id="description" class="weather-card__description"></p>
+
+            <div class="weather-card__details">
+                <div class="detail">
+                    <span class="detail__label">Kelembaban</span>
+                    <span id="humidity" class="detail__value"></span>
+                </div>
+                <div class="detail">
+                    <span class="detail__label">Angin</span>
+                    <span id="wind" class="detail__value"></span>
+                </div>
+                <div class="detail">
+                    <span class="detail__label">Tekanan</span>
+                    <span id="pressure" class="detail__value"></span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
